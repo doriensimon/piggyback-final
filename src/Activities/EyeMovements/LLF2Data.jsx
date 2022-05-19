@@ -1,0 +1,48 @@
+export const column1 = [
+  "I'm at the car",
+  "Mum saw a bug",
+  "One day I saw",
+  "How bad to see",
+  "Few men can eat",
+  "Do not ask me",
+  "One day our fox",
+  "It's us you see",
+  "Any boy can see",
+  "Who ate it up",
+];
+export const column2 = [
+  "It was hot mud",
+  "The old bad dog",
+  "His own big kid",
+  "Hot bus for us",
+  "The red tin cot",
+  "His mum in mud",
+  "Cat in a hat",
+  "His own hot dad",
+  "A red mop bin",
+  "Pig bag and mud",
+];
+export const column3 = [
+  "His leg ran far",
+  "Why not eat jam",
+  "Hop on the log",
+  "Fly on the bed",
+  "Hop on his eye",
+  "Get off my hat",
+  "Run to the dog",
+  "She had to fly",
+  "Saw the log jam",
+  "Hop all the day",
+];
+export const column4 = [
+  "Red hot tin van",
+  "Our pig can eat",
+  "The cat has gum",
+  "So few got out",
+  "He ate the bug",
+  "Get off I'm old",
+  "Too big to eat",
+  "And you are mud",
+  "Mud and the log",
+  "Eat up the lot",
+];

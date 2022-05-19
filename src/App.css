@@ -1,0 +1,501 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap");
+
+.App {
+  background: white;
+  color: black;
+  overflow: hidden;
+  font-family: "Rubik", sans-serif;
+}
+
+#logo {
+  font-weight: 900;
+  font-size: 35px;
+}
+
+#header {
+  text-align: center;
+  background: #fff5c4;
+  padding: 10px;
+  margin-bottom: 30px;
+  height: 40px;
+}
+
+.react-pdf__Document {
+  padding: 10px;
+}
+
+.react-pdf__Document {
+  outline: solid black 1px;
+}
+
+#button {
+  background: #fe6847;
+  color: white;
+}
+
+#disabled {
+  /* Increase the specificity */
+  color: white;
+  background: #fe6847;
+  opacity: 0.7;
+}
+
+.layout {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  width: 100%;
+}
+
+.topics {
+  border: 1px solid black;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+}
+
+.Collapsible__trigger is-open {
+  padding-left: 3%;
+}
+
+.pdfbox {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.pdf {
+  background: darkblue;
+}
+
+.activity {
+  height: 90vh;
+  width: 100vh;
+  background: darkblue;
+}
+
+.react-pdf__Page__canvas {
+  margin: 0;
+  width: 0;
+}
+
+.options {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  width: 100%;
+  border: 1px solid black;
+  background: lightgray;
+}
+
+#dropdown-basic::after {
+  display: none;
+}
+
+#dropdown-basic {
+  background-color: lightgray;
+  color: black;
+  background: lightgray;
+  border-color: transparent;
+}
+
+.btn-primary {
+  background-color: white;
+  color: white;
+  background: white;
+}
+
+#disabled {
+  background: white;
+  color: black;
+}
+
+#button {
+  background: white;
+  color: black;
+}
+
+.react-pdf__Document {
+  left: 50%;
+}
+
+.pdfHolder {
+  display: flex;
+  justify-content: center;
+}
+
+.Collapsible__trigger {
+  font-weight: bold;
+}
+
+.Collapsible__contentInner {
+  padding-left: 3%;
+}
+
+.Collapsible__contentInner:hover {
+  cursor: pointer;
+}
+
+.white_container {
+  background-color: white;
+  width: 90%;
+  height: 30%;
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.flashImage {
+  height: auto;
+  width: 100px;
+}
+
+.white_container_flex {
+  background-color: white;
+  width: 90%;
+  height: 30%;
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.container {
+  display: flex;
+  gap: 2%;
+  top: 50%;
+  position: absolute;
+  /* left: 50%; */
+  /* transform: translate(-15%, -50%); */
+  justify-content: center;
+  /* align-items: center; */
+}
+
+.activity_box {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  display: "flex";
+  justify-content: "space-around";
+}
+
+.button_section {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+.blue_triangle {
+  width: 0;
+  height: 0;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+
+  border-bottom: 50px solid blue;
+}
+
+.yellow_square {
+  width: 20%;
+  height: 55%;
+  background-color: yellow;
+}
+
+.red_diamond {
+  width: 15%;
+  height: 45%;
+  background-color: red;
+  transform: rotate(45deg);
+}
+
+#countLetText {
+  color: white;
+  font-weight: bold;
+  font-size: 3em;
+  text-shadow: 4px 6px 10px black;
+  font-family: Arial, sans-serif;
+  display: block;
+}
+
+.startText {
+  color: greenyellow;
+  font-weight: bold;
+  font-size: 1.5em;
+  text-shadow: 4px 6px 10px black;
+  font-family: Arial, sans-serif;
+  display: block;
+}
+
+/* #shape1 {
+  position: absolute;
+  left: 5%;
+  top: 20%;
+}
+
+#shape2 {
+  position: absolute;
+  left: 40%;
+  top: 25%;
+}
+
+#shape3 {
+  position: absolute;
+  right: 5%;
+  top: 25%;
+} */
+
+.green_circle {
+  height: 25px;
+  width: 25px;
+  background-color: greenyellow;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.long_rectangle {
+  height: 20px;
+  width: 20%;
+  background-color: greenyellow;
+  border-radius: 20px;
+}
+
+.short_rectangle {
+  height: 20px;
+  width: 10%;
+  background-color: greenyellow;
+  border-radius: 25px;
+}
+
+.tableItem {
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.table {
+  border-spacing: 1em;
+}
+
+.table2 {
+  border-spacing: 1em;
+}
+
+.tableRow {
+  border-color: transparent;
+}
+
+.table2 tr td:nth-child(2n + 3) {
+  text-align: left;
+  color: red;
+  border-spacing: 1em;
+}
+
+.table2 tr td:nth-child(n + 1) {
+  text-align: left;
+  color: red;
+  border-spacing: 2em;
+}
+
+.table2 tr td:nth-child(3n + 3) {
+  text-align: right;
+  color: green;
+  border-spacing: 6em;
+}
+
+.Collapsible__contentInner > div:hover {
+  cursor: pointer;
+}
+
+#whitetext {
+  color: white;
+  font-weight: bold;
+  font-size: 3em;
+  text-shadow: 4px 6px 10px black;
+  font-family: Arial, sans-serif;
+}
+
+#seqText {
+  color: white;
+  font-weight: bold;
+  font-size: 3em;
+  text-shadow: 4px 6px 10px black;
+  font-family: Arial, sans-serif;
+}
+
+#redtext {
+  color: red;
+  font-weight: bold;
+  font-size: 3em;
+  text-shadow: 4px 6px 10px black;
+  font-family: Arial, sans-serif;
+}
+
+#greentext {
+  color: greenyellow;
+  font-weight: bold;
+  font-size: 3em;
+  text-shadow: 4px 6px 10px black;
+  font-family: Arial, sans-serif;
+}
+
+#correctText {
+  color: greenyellow;
+  font-weight: bold;
+  font-size: 3em;
+  text-shadow: 4px 6px 10px black;
+  font-family: Arial, sans-serif;
+}
+
+#incorrectText {
+  color: red;
+  font-weight: bold;
+  font-size: 3em;
+  text-shadow: 4px 6px 10px black;
+  font-family: Arial, sans-serif;
+}
+
+#redfill {
+  background-color: red;
+}
+
+#greenfill {
+  background-color: greenyellow;
+}
+
+#silverfill {
+  background-color: silver;
+}
+
+#normalOrientation {
+  color: white;
+  font-weight: bold;
+  font-size: 2em;
+}
+
+#flippedOrientation {
+  color: white;
+  transform: scaleX(-1);
+  font-weight: bold;
+  font-size: 2em;
+}
+
+#rotate90Orientation {
+  color: white;
+  transform: rotate(90deg);
+  font-weight: bold;
+  font-size: 2em;
+}
+
+#rotate180Orientation {
+  color: white;
+  transform: rotate(180deg);
+  font-weight: bold;
+  font-size: 2em;
+}
+
+#rotate270Orientation {
+  color: white;
+  transform: rotate(270deg);
+  font-weight: bold;
+  font-size: 2em;
+}
+
+.circle {
+  height: 50px;
+  width: 50px;
+  background-color: silver;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circRow {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+}
+
+#columns {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: calc(0.5 * 100vh);
+  width: calc(0.3 * 100vw);
+  margin-top: -25%;
+}
+
+.flashingPicsImage {
+  max-width: 90%;
+  max-height: 90%;
+}
+
+.namingPics {
+  margin: 5px;
+}
+
+.namingNum {
+  margin: 5px;
+  font-size: 24pt;
+  color: white;
+  /* font-weight: bold; */
+  text-shadow: 4px 6px 10px black;
+  font-family: Arial, sans-serif;
+  width: 30px;
+  text-align: center;
+}
+
+.wordOptions {
+  /* display: inline; */
+  margin: 10px;
+}
+
+.wordOptions:hover {
+  cursor: pointer;
+}
+
+#columnsDotToDot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: calc(0.5 * 100vh);
+  width: calc(0.3 * 100vw);
+  margin: auto;
+}
+
+.columnChart {
+  display: flex;
+  flex-direction: column;
+  background-color: #fe6847;
+}
+
+.rowChart {
+  display: flex;
+  color: white;
+}
+
+.cell {
+  width: 100px;
+}
+
+.whiteStyle {
+  color: white;
+  font-weight: bold;
+  font-size: 3em;
+  text-shadow: 4px 6px 10px black;
+  font-family: Arial, sans-serif;
+}

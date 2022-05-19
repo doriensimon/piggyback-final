@@ -1,0 +1,47 @@
+export const column1 = [
+  "Once upon a time",
+  "Not that long ago",
+  "From a different earth",
+  "After next Saturday night",
+  "In a different time",
+  "That same happy year",
+  "Tomorrow after the rain",
+  "Yesterday before breakfast began",
+  "Before the sun comes up",
+];
+export const column2 = [
+  "Inside the high castle",
+  "Under red fox moons",
+  "On the hot beach",
+  "In a cold wet park",
+  "Across the city street",
+  "Before the surprise party",
+  "Below a tin shed",
+  "Next to the green room",
+  "Around the large yard",
+  "Over the awesome world",
+];
+export const column3 = [
+  "Excited mothers sang too loud ",
+  "Sister played with her food",
+  "The cats fly through",
+  "People ask why not",
+  "They walked towards dinner",
+  "She saw a second cousin",
+  "Children forgot to bring music",
+  "Kids ate big round pies",
+  "He watched dogs play",
+  "Fathers think about brown birds ",
+];
+export const column4 = [
+  "Trying to stay awake",
+  "Without making a face",
+  "From behind the door",
+  "Never wondering what followed",
+  "Who made a fart?",
+  "What was that sound?",
+  "Taking too long to go",
+  "It was a fun day",
+  "Too excited to sleep",
+  "Why not be me?",
+];
