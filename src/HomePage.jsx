@@ -1192,7 +1192,7 @@ export default function HomePage() {
                           : "transparent",
                     }}
                   >
-                    Bear Walk?
+                    Bear Walk
                   </div>
                   <div
                     onClick={() => {
@@ -1890,7 +1890,7 @@ export default function HomePage() {
                   </div>
                 </Collapsible> */}
               </Collapsible>
-              <Collapsible trigger="⇰ Turning on your Brain">
+              <Collapsible trigger="⇰ Turning on Your Brain">
                 <Collapsible trigger="⇰ Level 1" open="true">
                   <div
                     onClick={() => {
