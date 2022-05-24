@@ -846,7 +846,7 @@ export default function HomePage() {
                   >
                     Flipping &amp; Rotating Cubes
                   </div>
-                  <div
+                  {/* <div
                     onClick={() => {
                       setPdf(
                         "VisualThinking/7Flipping&RotatingDotToDotInstruct.pdf"
@@ -864,7 +864,7 @@ export default function HomePage() {
                     }}
                   >
                     Flipping &amp; Rotating Dot to Dot Patterns
-                  </div>
+                  </div> */}
                   <div
                     onClick={() => {
                       setPdf("VisualThinking/7BlocksInAHoleInstruct.pdf");
@@ -1401,14 +1401,14 @@ export default function HomePage() {
                 <Collapsible trigger="⇰ Level 8" open="true">
                   <div
                     onClick={() => {
-                      setPdf("OrganisingSpace/8bdpAndqInstruct.pdf");
+                      setPdf("OrganisingSpace/8bdpandqInstruct.pdf");
                       setActivityShown(false);
                       setDisable(false);
                       setStopFunc((prev) => prev + 1);
                     }}
                     style={{
                       backgroundColor:
-                        Pdf === "OrganisingSpace/8bdpAndqInstruct.pdf"
+                        Pdf === "OrganisingSpace/8bdpandqInstruct.pdf"
                           ? "lightgrey"
                           : "transparent",
                     }}
@@ -1452,7 +1452,7 @@ export default function HomePage() {
                   </div>
                 </Collapsible>
                 <Collapsible trigger="⇰ Level 9" open="true">
-                  <div
+                  {/* <div
                     onClick={() => {
                       setPdf("OrganisingSpace/9FindTheWrongLetterInstruct.pdf");
                       setActivityShown(false);
@@ -1468,7 +1468,7 @@ export default function HomePage() {
                     }}
                   >
                     Find the Wrong Letter
-                  </div>
+                  </div> */}
                   <div
                     onClick={() => {
                       setPdf("OrganisingSpace/9MouseInAMazeInstruct.pdf");
@@ -2220,7 +2220,7 @@ export default function HomePage() {
                   </div>
                 </Collapsible>
                 <Collapsible trigger="⇰ Level 9" open="true">
-                  <div
+                  {/* <div
                     onClick={() => {
                       setPdf("TurningOnYourBrain/9WordsOnTheRunInstruct.pdf");
                       setActivityShown(false);
@@ -2235,7 +2235,7 @@ export default function HomePage() {
                     }}
                   >
                     Words on the Run
-                  </div>
+                  </div> */}
                 </Collapsible>
               </Collapsible>
               <Collapsible trigger="⇰ Eye &amp; Hand">
