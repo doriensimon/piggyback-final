@@ -1,26 +1,13 @@
 import Dropdown from "react-bootstrap/Dropdown";
 
-export default function FlashingPictureButtons(props) {
+export default function RotatingFlippingButtons(props) {
   return (
     <div style={{ display: "flex" }}>
       <Dropdown style={{ display: props.FlashRateDisplay }}>
         <Dropdown.Toggle variant="success" id="dropdown-basic">
           Flash Rate
         </Dropdown.Toggle>
-
         <Dropdown.Menu>
-        <Dropdown.Item
-            onClick={() => props.flashRate("continuous")}
-            active={props.flashBool === "continuous"}
-          >
-            Continuous
-          </Dropdown.Item>
-          <Dropdown.Item
-            onClick={() => props.flashRate(100)}
-            active={props.flashBool === 100}
-          >
-            0.10
-          </Dropdown.Item>
           <Dropdown.Item
             onClick={() => props.flashRate(250)}
             active={props.flashBool === 250}
@@ -97,7 +84,7 @@ export default function FlashingPictureButtons(props) {
       </Dropdown>
       <Dropdown style={{ display: props.levelDisplay }}>
         <Dropdown.Toggle variant="success" id="dropdown-basic">
-          Level
+          Rotation
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
@@ -105,51 +92,63 @@ export default function FlashingPictureButtons(props) {
             onClick={() => props.changeLevel("Level1")}
             active={props.levelBool === "Level1"}
           >
-            Level 1
+            Up Side Down
           </Dropdown.Item>
           <Dropdown.Item
             onClick={() => props.changeLevel("Level2")}
             active={props.levelBool === "Level2"}
           >
-            Level 2
+            Flipped Sideways
           </Dropdown.Item>
           <Dropdown.Item
             onClick={() => props.changeLevel("Level3")}
             active={props.levelBool === "Level3"}
           >
-            Level 3
+            Rotated Quarter Turn Clockwise
           </Dropdown.Item>
           <Dropdown.Item
             onClick={() => props.changeLevel("Level4")}
             active={props.levelBool === "Level4"}
           >
-            Level 4
+            Rotated Half A Turn
           </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
       <Dropdown style={{ display: props.hiddenLetterDisplay }}>
         <Dropdown.Toggle variant="success" id="dropdown-basic">
-          Beat
+          Choices
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
-          <Dropdown.Item
-            onClick={() => props.useBeat(true)}
-            active={props.beatBool}
+        <Dropdown.Item
+            onClick={() => props.changeLevel("Level1")}
+            active={props.levelBool === "Level1"}
           >
-            Use Beat
+            Up Side Down
           </Dropdown.Item>
           <Dropdown.Item
-            onClick={() => props.useBeat(false)}
-            active={!props.beatBool}
+            onClick={() => props.changeLevel("Level2")}
+            active={props.levelBool === "Level2"}
           >
-            Don't Use a Beat
+            Flipped Sideways
+          </Dropdown.Item>
+          <Dropdown.Item
+            onClick={() => props.changeLevel("Level3")}
+            active={props.levelBool === "Level3"}
+          >
+            Rotated Quarter Turn Clockwise
+          </Dropdown.Item>
+          <Dropdown.Item
+            onClick={() => props.changeLevel("Level4")}
+            active={props.levelBool === "Level4"}
+          >
+            Rotated Half A Turn
           </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
       <Dropdown>
         <Dropdown.Toggle variant="success" id="dropdown-basic">
-          Image Size
+          Level
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
@@ -157,19 +156,13 @@ export default function FlashingPictureButtons(props) {
             onClick={() => props.changeImage("auto")}
             active={props.imageBool === "auto"}
           >
-            Normal
+            Level 1
           </Dropdown.Item>
           <Dropdown.Item
             onClick={() => props.changeImage("50%")}
             active={props.imageBool === "50%"}
           >
-            Medium
-          </Dropdown.Item>
-          <Dropdown.Item
-            onClick={() => props.changeImage("90%")}
-            active={props.imageBool === "90%"}
-          >
-            Large
+            Level 2
           </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>

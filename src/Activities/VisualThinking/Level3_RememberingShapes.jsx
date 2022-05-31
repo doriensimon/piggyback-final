@@ -58,12 +58,17 @@ export default function Level1_FlashingPictures() {
       }
       setLast(random);
       setImage(JSON.stringify(random));
-      setTimeout(() => {
+      if (time === "continuous") {
         setDisplayTime("visible");
+      } else {
         setTimeout(() => {
-          setDisplayTime("hidden");
-        }, time);
-      }, 600);
+          setDisplayTime("visible");
+          setTimeout(() => {
+            setDisplayTime("hidden");
+          }, time);
+        }, 600);
+      }
+      
     } else {
       setDisplayTime("visible");
     }

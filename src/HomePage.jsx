@@ -2219,8 +2219,8 @@ export default function HomePage() {
                     3 Dot Card
                   </div>
                 </Collapsible>
-                <Collapsible trigger="⇰ Level 9" open="true">
-                  {/* <div
+                {/* <Collapsible trigger="⇰ Level 9" open="true">
+                  <div
                     onClick={() => {
                       setPdf("TurningOnYourBrain/9WordsOnTheRunInstruct.pdf");
                       setActivityShown(false);
@@ -2235,8 +2235,8 @@ export default function HomePage() {
                     }}
                   >
                     Words on the Run
-                  </div> */}
-                </Collapsible>
+                  </div>
+                </Collapsible> */}
               </Collapsible>
               <Collapsible trigger="⇰ Eye &amp; Hand">
                 <Collapsible trigger="⇰ Level 1" open="true">

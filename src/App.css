@@ -323,6 +323,13 @@
   text-shadow: 4px 6px 10px black;
   font-family: Arial, sans-serif;
 }
+.whiteTextStyle {
+  color: white;
+  font-weight: bold;
+  font-size: 3em;
+  text-shadow: 4px 6px 10px black;
+  font-family: Arial, sans-serif;
+}
 
 #seqText {
   color: white;
@@ -489,6 +496,10 @@
 }
 
 .cell {
+  width: 100px;
+}
+
+.cellArrow {
   width: 100px;
 }
 

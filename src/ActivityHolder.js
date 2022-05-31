@@ -31,6 +31,8 @@ import Level8_TheLongVowelSounds from "./Activities/SequencingVisionandLanguage/
 import Level9_TheVowelsWithR from "./Activities/SequencingVisionandLanguage/Level9_TheVowelsWithR";
 import Level9_OtheraAndoSounds from "./Activities/SequencingVisionandLanguage/Level9_Othera&oSounds";
 import Level9_TheRuleBreakers from "./Activities/SequencingVisionandLanguage/Level9_TheRuleBreakers";
+import Level8_FlippingAndRotatingShapes from "./Activities/VisualThinking/Level8_Flipping&RotatingShapes";
+import Level6_Arrows from "./Activities/OrganisingSpace/Level6_Arrows";
 
 class ActivityHolder extends React.Component {
   constructor(props) {
@@ -146,6 +148,14 @@ class ActivityHolder extends React.Component {
         {this.state.activityName ==
           "SequencingVision&Learning/9TheRuleBreakers" && (
           <Level9_TheRuleBreakers />
+        )}
+        {this.state.activityName ==
+          "VisualThinking/8Flipping&RotatingShapes" && (
+          <Level8_FlippingAndRotatingShapes />
+        )}
+        {this.state.activityName ==
+          "OrganisingSpace/6Arrows" && (
+          <Level6_Arrows />
         )}
       </div>
     );
