@@ -10,16 +10,10 @@ export default function FlashingPictureButtons(props) {
 
         <Dropdown.Menu>
           <Dropdown.Item
-            onClick={() => props.flashRate(100)}
-            active={props.flashBool === 100}
+            onClick={() => props.flashRate("continuous")}
+            active={props.flashBool === "continuous"}
           >
             Continuous
-          </Dropdown.Item>
-          <Dropdown.Item
-            onClick={() => props.flashRate(100)}
-            active={props.flashBool === 100}
-          >
-            0.10
           </Dropdown.Item>
           <Dropdown.Item
             onClick={() => props.flashRate(250)}

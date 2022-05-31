@@ -152,9 +152,12 @@ class Level2_FlashingClapPictures extends React.Component {
       this.setState({ number2: "block" });
     }
     this.setState({ show: true });
-    setTimeout(() => {
-      this.setState({ show: false });
-    }, this.state.displayTime);
+    if (this.state.displayTime !== "continuous") {
+      setTimeout(() => {
+        this.setState({ show: false });
+      }, this.state.displayTime);
+    }
+    
     if (!this.state.started) {
       this.runBeat();
       this.setState({ started: true });
@@ -220,7 +223,7 @@ class Level2_FlashingClapPictures extends React.Component {
           </div>
         )}
         <div className="button_section">
-          <button onClick={() => this.setState({ show: true })}>Check</button>
+          <button disabled={this.state.displayTime === "continuous"} onClick={() => this.setState({ show: true })}>Check</button>
           <button onClick={() => this.nextActivity()}>Next</button>
         </div>
       </div>
