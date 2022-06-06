@@ -180,46 +180,47 @@ class Level2_FlashingClapPictures extends React.Component {
           guideBool={this.state.guide}
           guideOption={this.state.activity === "norm"}
         />
+        {this.state.activity !== "norm" && <hr style={{position: 'absolute', width: '100%', height: '5px', color: '#fff', top: '388px'}}/>}
         {this.state.show && (
-          <div className="container" style={this.state.backImage}>
-            <div
+          <div className="container">
+            {this.state.show && <div
               style={{
                 marginTop: this.state.margin0,
               }}
             >
               {this.state.display0}
-            </div>
-            <div
+            </div>}
+            {this.state.show && <div
               style={{
                 marginTop: this.state.margin1,
               }}
             >
               {this.state.display1}
-            </div>
-            <div
+            </div>}
+            {this.state.show && <div
               style={{
                 marginTop: this.state.margin2,
               }}
             >
               {this.state.display2}
-            </div>
-            <div
+            </div>}
+            {this.state.show && <div
               style={{
                 marginTop: this.state.margin3,
                 display: this.state.number1,
               }}
             >
               {this.state.display3}
-            </div>
+            </div>}
 
-            <div
+            {this.state.show && <div
               style={{
                 marginTop: this.state.margin3,
                 display: this.state.number2,
               }}
             >
               {this.state.display4}
-            </div>
+            </div>}
           </div>
         )}
         <div className="button_section">

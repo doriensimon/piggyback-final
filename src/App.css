@@ -331,6 +331,23 @@
   font-family: Arial, sans-serif;
 }
 
+.whiteTextPara {
+  color: white;
+  font-weight: bold;
+  font-size: 1em;
+  text-shadow: 4px 6px 10px black;
+  font-family: Arial, sans-serif;
+  padding-left: 10%;
+  padding-right: 10%;
+  margin-top: 20px;
+}
+
+.highlightListText {
+  color: 'greenyellow';
+  background-color: 'greenyellow';
+  font-size: 1.5em;
+}
+
 #seqText {
   color: white;
   font-weight: bold;
@@ -353,6 +370,15 @@
   font-size: 3em;
   text-shadow: 4px 6px 10px black;
   font-family: Arial, sans-serif;
+}
+
+.greenTextHeader {
+  color: greenyellow;
+  font-weight: bold;
+  font-size: 2em;
+  text-shadow: 4px 6px 10px black;
+  font-family: Arial, sans-serif;
+  text-align: center;
 }
 
 #correctText {
@@ -418,6 +444,16 @@
 }
 
 .circle {
+  height: 50px;
+  width: 50px;
+  background-color: silver;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circleDot {
   height: 50px;
   width: 50px;
   background-color: silver;

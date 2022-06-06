@@ -12,17 +12,20 @@ export default function Level1_FlashingPictures() {
     setDisplayTime("hidden");
   }, [time, dirPath]);
 
-  function displayPicture(buttonName) {
+
+  function flashImage() {
+    setDisplayTime("visible")
+    setTimeout(() => {
+      setDisplayTime("hidden");
+    }, time);
+  }
+
+  function displayPicture(buttonName, callback) {
     if (buttonName !== "check") {
       let random = Math.floor(Math.random() * 91) + 1;
       setImage(JSON.stringify(random));
 
-      setTimeout(() => {
-        setDisplayTime("visible");
-        setTimeout(() => {
-          setDisplayTime("hidden");
-        }, time);
-      }, 600);
+      callback()
     } else {
       setDisplayTime("visible");
     }
@@ -59,7 +62,10 @@ export default function Level1_FlashingPictures() {
           style={{ visibility: displayTime }}
         />
       </div>
-      <NextCheckButtons displayFunc={displayPicture} />
+      <div>
+        <button onClick={() => {displayPicture("check")}}>Check</button>
+        <button onClick={() => {displayPicture("next", flashImage)}}>Next</button>
+      </div>
     </div>
   );
 }

@@ -1,7 +1,8 @@
 import { useEffect, useState, useRef, createRef } from "react";
-import LetterChartButtons from "../EyeMovements/letterChartButtons";
+
 import useSound from "use-sound";
 import { ImArrowUp, ImArrowRight, ImArrowDown, ImArrowLeft } from 'react-icons/im';
+import ArrowButtons from "./arrowButtons"
 
 export default function Level5_LetterCharts(props) {
   var [grid, setGrid] = useState(3);
@@ -18,6 +19,7 @@ export default function Level5_LetterCharts(props) {
   var place = 0;
   var [testTime, setTestTime] = useState(0);
   var [running, setRunning] = useState(false);
+  var curr = 0;
 
   const upArrow = <ImArrowUp style={{height: '30px'}}/>
   const downArrow = <ImArrowDown style={{height: '30px'}}/>
@@ -46,7 +48,7 @@ export default function Level5_LetterCharts(props) {
       clearTimeout(i);
       clearInterval(i);
     }
-  }, [props.change]);
+  }, [props.change, sound, beat, grid]);
 
   function stopFunction() {
     clearInterval(intervalId);
@@ -54,7 +56,7 @@ export default function Level5_LetterCharts(props) {
   }
 
   function selectedLetters() {
-    let count = parseInt(grid) + parseInt(grid);
+    let count = parseInt(grid) * parseInt(grid);
     for (let i = 0; i < count; i++) {
       selected.push(i);
     }
@@ -76,7 +78,7 @@ export default function Level5_LetterCharts(props) {
       myRefs.current[place].current.style.color = "greenyellow";
       clearOut(place);
       place++;
-      if (place === parseInt(grid) + parseInt(grid)) {
+      if (place === parseInt(grid) * parseInt(grid)) {
         clearInterval(color);
         setRunning(false);
       }
@@ -111,13 +113,10 @@ export default function Level5_LetterCharts(props) {
 
   function CreateLetters(place) {
     let temp = [];
-    if (mode === "FirstLast") {
       for (let i = 0; i < grid; i++) {
-        if (i === 0) {
-            
           temp.push(
             <div
-              ref={myRefs.current[2 * place]}
+              ref={myRefs.current[curr]}
               key={Date.now() + i}
               className="cellArrow"
               style={{ marginRight: spacing }}
@@ -125,105 +124,14 @@ export default function Level5_LetterCharts(props) {
               {getDirection()}
             </div>
           );
-        } else if (i === grid - 1) {
-          temp.push(
-            <div
-              key={Date.now() + i}
-              ref={myRefs.current[2 * place + 1]}
-              className="cellArrow"
-              style={{ marginRight: spacing }}
-            >
-              {getDirection()}
-            </div>
-          );
-        } else {
-          temp.push(
-            <div
-              key={Date.now() + i}
-              className="cellArrow"
-              style={{ marginRight: spacing }}
-            >
-              {getDirection()}
-            </div>
-          );
-        }
+          curr++;
       }
-    } else if (mode === "Second") {
-      for (let i = 0; i < grid; i++) {
-        if (i === 1) {
-          temp.push(
-            <div
-              ref={myRefs.current[2 * place]}
-              key={Date.now() + i}
-              style={{ marginRight: spacing }}
-              className="cellArrow"
-            >
-              {getDirection()}
-            </div>
-          );
-        } else if (i === grid - 2) {
-          temp.push(
-            <div
-              key={Date.now() + i}
-              ref={myRefs.current[2 * place + 1]}
-              style={{ marginRight: spacing }}
-              className="cellArrow"
-            >
-              {getDirection()}
-            </div>
-          );
-        } else {
-          temp.push(
-            <div
-              key={Date.now() + i}
-              style={{ marginRight: spacing }}
-              className="cellArrow"
-            >
-              {getDirection()}
-            </div>
-          );
-        }
-      }
-    } else {
-      for (let i = 0; i < grid; i++) {
-        if (i === 1) {
-          temp.push(
-            <div
-              key={Date.now() + i}
-              className="cellArrow"
-              style={{ marginRight: spacing }}
-            >
-              {getDirection()}
-            </div>
-          );
-        } else if (i === grid - 2) {
-          temp.push(
-            <div
-              key={Date.now() + i}
-              className="cellArrow"
-              style={{ marginRight: spacing }}
-            >
-              {getDirection()}
-            </div>
-          );
-        } else {
-          temp.push(
-            <div
-              key={Date.now() + i}
-              className="cellArrow"
-              style={{ marginRight: spacing }}
-            >
-              {getDirection()}
-            </div>
-          );
-        }
-      }
-    }
 
     return temp;
   }
 
   function createRow() {
+    curr = 0;
     selectedLetters();
     myRefs.current = selected.map(
       (element, i) => myRefs.current[i] ?? createRef()
@@ -245,9 +153,8 @@ export default function Level5_LetterCharts(props) {
       );
     }
     setChart(tempChart);
-    if (mode !== "Off") {
+
       triggerGreen();
-    }
   }
 
   return (
@@ -259,19 +166,11 @@ export default function Level5_LetterCharts(props) {
         height: "100%",
       }}
     >
-      <LetterChartButtons
+      <ArrowButtons
         flashRate={setBeat}
         flashBool={beat}
         ChangeRow={setGrid}
         rowBool={grid}
-        changeMode={setFontCase}
-        modeBool={fontCase}
-        changeSize={setSize}
-        sizeBool={size}
-        changeFlash={setMode}
-        triggerBool={mode}
-        changeSpacing={setSpacing}
-        spaceBool={spacing}
         changeSound={setSound}
         soundBool={sound}
       />

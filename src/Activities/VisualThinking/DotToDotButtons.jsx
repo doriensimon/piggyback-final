@@ -1,13 +1,20 @@
 import Dropdown from "react-bootstrap/Dropdown";
 
-export default function RotatingFlippingButtons(props) {
+export default function FlashingPictureButtons(props) {
   return (
     <div style={{ display: "flex" }}>
       <Dropdown style={{ display: props.FlashRateDisplay }}>
         <Dropdown.Toggle variant="success" id="dropdown-basic">
           Flash Rate
         </Dropdown.Toggle>
+
         <Dropdown.Menu>
+          <Dropdown.Item
+            onClick={() => props.flashRate(100)}
+            active={props.flashBool === 100}
+          >
+            0.10
+          </Dropdown.Item>
           <Dropdown.Item
             onClick={() => props.flashRate(250)}
             active={props.flashBool === 250}
@@ -82,87 +89,49 @@ export default function RotatingFlippingButtons(props) {
           </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
-      <Dropdown style={{ display: props.levelDisplay }}>
-        <Dropdown.Toggle variant="success" id="dropdown-basic">
-          Rotation
-        </Dropdown.Toggle>
-
-        <Dropdown.Menu>
-          <Dropdown.Item
-            onClick={() => {props.changeLevel("scaleY(-1)"); props.changeChoice(false)}}
-            active={props.levelBool === "scaleY(-1)" && !props.choiceBool}
-          >
-            Up Side Down
-          </Dropdown.Item>
-          <Dropdown.Item
-            onClick={() => {props.changeLevel("scaleX(-1)"); props.changeChoice(false)}}
-            active={props.levelBool === "scaleX(-1)" && !props.choiceBool}
-          >
-            Flipped Sideways
-          </Dropdown.Item>
-          <Dropdown.Item
-            onClick={() => {props.changeLevel("rotate(90deg)"); props.changeChoice(false)}}
-            active={props.levelBool === "rotate(90deg)" && !props.choiceBool}
-          >
-            Rotated Quarter Turn Clockwise
-          </Dropdown.Item>
-          <Dropdown.Item
-            onClick={() => {props.changeLevel("rotate(180deg)"); props.changeChoice(false)}}
-            active={props.levelBool === "rotate(180deg)" && !props.choiceBool}
-          >
-            Rotated Half A Turn
-          </Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
       <Dropdown style={{ display: props.hiddenLetterDisplay }}>
-        <Dropdown.Toggle variant="success" id="dropdown-basic">
-          Choices
-        </Dropdown.Toggle>
-
-        <Dropdown.Menu>
-        <Dropdown.Item
-            onClick={() => {props.changeLevel("scaleY(-1)"); props.changeChoice(true)}}
-            active={props.levelBool === "scaleY(-1)" && props.choiceBool}
-          >
-            Up Side Down
-          </Dropdown.Item>
-          <Dropdown.Item
-            onClick={() => {props.changeLevel("scaleX(-1)"); props.changeChoice(true)}}
-            active={props.levelBool === "scaleX(-1)" && props.choiceBool}
-          >
-            Flipped Sideways
-          </Dropdown.Item>
-          <Dropdown.Item
-            onClick={() => {props.changeLevel("rotate(90deg)"); props.changeChoice(true)}}
-            active={props.levelBool === "rotate(90deg)" && props.choiceBool}
-          >
-            Rotated Quarter Turn Clockwise
-          </Dropdown.Item>
-          <Dropdown.Item
-            onClick={() => {props.changeLevel("rotate(180deg)"); props.changeChoice(true)}}
-            active={props.levelBool === "rotate(180deg)" && props.choiceBool}
-          >
-            Rotated Half A Turn
-          </Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
-      <Dropdown>
         <Dropdown.Toggle variant="success" id="dropdown-basic">
           Level
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
           <Dropdown.Item
-            onClick={() => props.changeImage("auto")}
-            active={props.imageBool === "auto"}
+            onClick={() => props.changeActivity(3)}
+            active={props.activityBool === 3}
           >
             Level 1
           </Dropdown.Item>
           <Dropdown.Item
-            onClick={() => props.changeImage("50%")}
-            active={props.imageBool === "50%"}
+            onClick={() => props.changeActivity(4)}
+            active={props.activityBool === 4}
           >
             Level 2
+          </Dropdown.Item>
+          <Dropdown.Item
+            onClick={() => props.changeActivity(5)}
+            active={props.activityBool === 5}
+          >
+            Level 3
+          </Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
+      <Dropdown>
+        <Dropdown.Toggle variant="success" id="dropdown-basic">
+          Beat
+        </Dropdown.Toggle>
+
+        <Dropdown.Menu>
+          <Dropdown.Item
+            onClick={() => props.addBeat(true)}
+            active={props.beatBool}
+          >
+            Use Beat
+          </Dropdown.Item>
+          <Dropdown.Item
+            onClick={() => props.addBeat(false)}
+            active={!props.beatBool}
+          >
+            Don't Use Beat
           </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>

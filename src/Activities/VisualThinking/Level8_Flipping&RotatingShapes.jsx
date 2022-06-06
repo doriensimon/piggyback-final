@@ -23,6 +23,17 @@ export default function Level1_FlashingPictures() {
   var [border3Color, setBorder3Color] = useState("white")
   var [border4Color, setBorder4Color] = useState("white")
   var [orientation, setOrientation] = useState("UpSideDown")
+  var [transform1, setTransform1] = useState("")
+  var [transform2, setTransform2] = useState("")
+  var [transform3, setTransform3] = useState("")
+  var [transform4, setTransform4] = useState("")
+  var [move, setMove] = useState("rotate(90deg)")
+  var [choice, setChoice] = useState(false)
+  var [correctCount, setCorrectCount] = useState(0)
+  var [totalCount, setTotalCount] = useState(1)
+
+  const rotateList = ["rotate(90deg)", "rotate(180deg)", "scaleX(-1)", "scaleY(-1)"]
+
 
   const [play] = useSound("/clickSound.wav");
 
@@ -31,32 +42,42 @@ export default function Level1_FlashingPictures() {
     setTriggered(false);
   }, [beat]);
 
+  useEffect(() => {
+    setDisplay(2)
+  }, [time, move, level, choice])
+
 
 
   function chooseOption(option) {
-    console.log("this is the: ", option)
-    if (option === correct) {
+    console.log(totalCount, "this is the count")
+    console.log(correct, option)
+    if (JSON.parse(option) === JSON.parse(correct)) {
         setDisplay(4)
+        setTotalCount(totalCount + 1)
+        setCorrectCount(correctCount + 1)
     } else {
         setDisplay(3)
+        setTotalCount(totalCount + 1)
+    }
+    if (totalCount === 5) {
+      setDisplay(5)
+      setTotalCount(0)
     }
   }
 
 
   function displayPicture(buttonName) {
-    setRotation("0deg")
-    if (beat && !triggered) {
-      setLoop(
-        setInterval(() => {
-          play();
-        }, 1000)
-      );
-      setTriggered(true);
-    }
-
     setDisplayTime("hidden");
+    setDisplay(2)
+    if (totalCount === 0) {
+      setCorrectCount(0)
+    }
+    setRotation("none")
+
+    
     let max;
     if (buttonName !== "check") {
+
       if (level === "Level1") {
         max = 38;
       }
@@ -64,39 +85,31 @@ export default function Level1_FlashingPictures() {
         max = 60;
       }
       if (level == "Level3") {
-        max = 29;
+        max = 28;
       }
       if (level == "Level4") {
         max = 57;
       }
       let random = Math.floor(Math.random() * max) + 1;
-      let degree = Math.floor(Math.random() * 4) + 1
-      console.log(degree, "this the degree")
-      if (degree === 1) {
-          setCorrect("1")
-          setRotation("90deg")
-      } else if (degree === 2) {
-          setCorrect("2")
-          setRotation("180deg")
-      } else if (degree === 3 ) {
-          setCorrect("3")
-          setRotation("270deg")
-      } else {
-          setCorrect("4")
-      }
-      if (random == last) {
-        if (random > 0) {
-          random -= 1;
-        }
-        if (random == 0) {
-          random += 1;
-        }
-      }
       setLast(random);
       setImage(JSON.stringify(random));
-      if (time === "continuous") {
-        setDisplayTime("visible");
+      console.log(random," this is the broken image")
+
+      if (!choice) {
+        setTimeout(() => {
+          setDisplay(0)
+          setTimeout(() => {
+            setDisplay(2)
+          }, time);
+        }, 200);
       } else {
+
+        rotateList.sort(() => Math.random() - 0.5)
+        setCorrect(JSON.stringify(rotateList.indexOf(move)))
+        setTransform1(rotateList[0])
+        setTransform2(rotateList[1])
+        setTransform3(rotateList[2])
+        setTransform4(rotateList[3])
         setTimeout(() => {
           setDisplay(0)
           setTimeout(() => {
@@ -104,9 +117,12 @@ export default function Level1_FlashingPictures() {
           }, time);
         }, 200);
       }
+
       
     } else {
-      setDisplay(0)
+      
+        setRotation(move)
+        setDisplay(0)
     }
   }
 
@@ -122,8 +138,10 @@ export default function Level1_FlashingPictures() {
       <RotatingFlippingButtons
         flashRate={setTime}
         flashBool={time}
-        changeLevel={setLevel}
-        levelBool={level}
+        changeLevel={setMove}
+        levelBool={move}
+        changeChoice={setChoice}
+        choiceBool={choice}
         useBeat={setBeat}
         beatBool={beat}
         imageBool={imageSize}
@@ -137,6 +155,7 @@ export default function Level1_FlashingPictures() {
           height: "100%",
         }}
       >
+        {display === 5 && <div className="whiteTextStyle">You scored {correctCount} out of 5 Good Job!!</div>}
           {display === 4 && <div id="correctText">Correct!</div>}
           {display === 3 && <div id="incorrectText">Incorrect!</div>}
         {display === 0 && <img
@@ -144,46 +163,46 @@ export default function Level1_FlashingPictures() {
           src={
             "/VisualThinking/RememberingShapes/" + level + "/" + image + ".jpg"
           }
-          style={{ height: imageSize, width: "auto", transform: 'rotate(' + rotation + ')' }}
+          style={{ height: imageSize, width: "auto", transform: rotation}}
         />}
         {display === 1 && <div>
             <div style={{display: "flex"}}>
-                <div onClick={() => chooseOption("1")} style={{backgroundColor: 'white', height: '100px', width: '100px', margin: "10px", display: 'flex', justifyContent: 'center', alignItems: 'center', border: 'solid', borderWidth: '3px', borderColor: border1Color}}><img
+                <div onClick={() => chooseOption("0")} style={{backgroundColor: 'white', height: '100px', width: '100px', margin: "10px", display: 'flex', justifyContent: 'center', alignItems: 'center', border: 'solid', borderWidth: '3px', borderColor: border1Color}}><img
                 className="flashingPicsImage"
                 src={
                     "/VisualThinking/RememberingShapes/" + level + "/" + image + ".jpg"
                 }
-                style={{height: '50px', width: "auto", transform: 'rotate(90deg)' }}
+                style={{height: '50px', width: "auto", transform: transform1  }}
                 /></div>
-                <div onClick={() => chooseOption("2")} style={{backgroundColor: 'white', height: "100px", width: '100px', margin: "10px", display: 'flex', justifyContent: 'center', alignItems: 'center', border: 'solid', borderWidth: '3px', borderColor: border2Color}}><img
+                <div onClick={() => chooseOption("1")} style={{backgroundColor: 'white', height: "100px", width: '100px', margin: "10px", display: 'flex', justifyContent: 'center', alignItems: 'center', border: 'solid', borderWidth: '3px', borderColor: border2Color}}><img
                 className="flashingPicsImage"
                 src={
                     "/VisualThinking/RememberingShapes/" + level + "/" + image + ".jpg"
                 }
-                style={{height: '50px', width: "auto", transform: 'rotate(180deg)' }}
+                style={{height: '50px', width: "auto", transform: transform2 }}
                 /></div>
             </div>
             <div style={{display: "flex"}}>
-                <div onClick={() => chooseOption("3")} style={{backgroundColor: 'white', height: "100px", width: '100px', margin: "10px", display: 'flex', justifyContent: 'center', alignItems: 'center', border: 'solid', borderWidth: '3px', borderColor: border3Color}}><img
+                <div onClick={() => chooseOption("2")} style={{backgroundColor: 'white', height: "100px", width: '100px', margin: "10px", display: 'flex', justifyContent: 'center', alignItems: 'center', border: 'solid', borderWidth: '3px', borderColor: border3Color}}><img
                 className="flashingPicsImage"
                 src={
                     "/VisualThinking/RememberingShapes/" + level + "/" + image + ".jpg"
                 }
-                style={{height: '50px', width: "auto", transform: 'rotate(270deg)' }}
+                style={{height: '50px', width: "auto", transform: transform3 }}
                 /></div>
-                <div onClick={() => chooseOption("4")} style={{backgroundColor: 'white', height: "100px", width: '100px', margin: "10px", display: 'flex', justifyContent: 'center', alignItems: 'center', border: 'solid', borderWidth: '3px', borderColor: border4Color}}><img
+                <div onClick={() => chooseOption("3")} style={{backgroundColor: 'white', height: "100px", width: '100px', margin: "10px", display: 'flex', justifyContent: 'center', alignItems: 'center', border: 'solid', borderWidth: '3px', borderColor: border4Color}}><img
                 className="flashingPicsImage"
                 src={
                     "/VisualThinking/RememberingShapes/" + level + "/" + image + ".jpg"
                 }
-                style={{height: '50px', width: "auto" }}
+                style={{height: '50px', width: "auto", transform: transform4 }}
                 /></div>
             </div>
                 
         </div>}
       </div>
           <div>
-              <button onClick={() => {
+              <button disabled={(display === 0) || (choice && (display === 0 || display === 1))} onClick={() => {
                   displayPicture("check")
               }}>Check</button>
               <button onClick={() => {

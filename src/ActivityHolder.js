@@ -33,6 +33,8 @@ import Level9_OtheraAndoSounds from "./Activities/SequencingVisionandLanguage/Le
 import Level9_TheRuleBreakers from "./Activities/SequencingVisionandLanguage/Level9_TheRuleBreakers";
 import Level8_FlippingAndRotatingShapes from "./Activities/VisualThinking/Level8_Flipping&RotatingShapes";
 import Level6_Arrows from "./Activities/OrganisingSpace/Level6_Arrows";
+import Level8_FindingLetters from "./Activities/TurningOnYourBrain/Level8_FindingLetters";
+
 
 class ActivityHolder extends React.Component {
   constructor(props) {
@@ -157,6 +159,7 @@ class ActivityHolder extends React.Component {
           "OrganisingSpace/6Arrows" && (
           <Level6_Arrows />
         )}
+        {this.state.activityName == "TurningOnYourBrain/8FindingLetters" && <Level8_FindingLetters /> }
       </div>
     );
   }
