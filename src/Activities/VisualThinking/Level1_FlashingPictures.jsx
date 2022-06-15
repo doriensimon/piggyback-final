@@ -12,6 +12,17 @@ export default function Level1_FlashingPictures() {
     setDisplayTime("hidden");
   }, [time, dirPath]);
 
+  useEffect(() => {
+    setDisplayTime("hidden")
+    setTimeout(() => {
+      setDisplayTime("visible")
+    setTimeout(() => {
+      setDisplayTime("hidden");
+    }, time);
+    }, 150)
+    
+  }, [image])
+
 
   function flashImage() {
     setDisplayTime("visible")
@@ -21,11 +32,14 @@ export default function Level1_FlashingPictures() {
   }
 
   function displayPicture(buttonName, callback) {
+    console.log("running displau pic")
     if (buttonName !== "check") {
       let random = Math.floor(Math.random() * 91) + 1;
       setImage(JSON.stringify(random));
-
-      callback()
+      // setTimeout(() => {
+      //   callback()
+      // }, 250)
+      
     } else {
       setDisplayTime("visible");
     }
