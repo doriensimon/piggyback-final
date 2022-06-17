@@ -3,31 +3,37 @@ import FlashingPictureButtons from "./picturesComponent";
 import { useEffect, useState } from "react";
 
 export default function Level1_FlashingPictures() {
-  var [displayTime, setDisplayTime] = useState("hidden");
+  var [displayTime, setDisplayTime] = useState(false);
   var [time, setTime] = useState(1000);
   var [image, setImage] = useState("");
   var [dirPath, setDirPath] = useState("/VisualThinking/FlashingPictures/");
+  var [count, setCount] = useState(0)
 
   useEffect(() => {
-    setDisplayTime("hidden");
+    setDisplayTime(false);
   }, [time, dirPath]);
 
   useEffect(() => {
-    setDisplayTime("hidden")
-    setTimeout(() => {
-      setDisplayTime("visible")
-    setTimeout(() => {
-      setDisplayTime("hidden");
-    }, time);
-    }, 150)
+     if (count === 1) {
+      setDisplayTime(false)
+      setTimeout(() => {
+        setDisplayTime(true)
+        setTimeout(() => {
+          setDisplayTime(false);
+        }, time);
+      }, 150)
+     } else {
+       setCount(1)
+     }
+    
     
   }, [image])
 
 
   function flashImage() {
-    setDisplayTime("visible")
+    setDisplayTime(true)
     setTimeout(() => {
-      setDisplayTime("hidden");
+      setDisplayTime(false);
     }, time);
   }
 
@@ -36,12 +42,13 @@ export default function Level1_FlashingPictures() {
     if (buttonName !== "check") {
       let random = Math.floor(Math.random() * 91) + 1;
       setImage(JSON.stringify(random));
+      console.log("I'm here")
       // setTimeout(() => {
       //   callback()
       // }, 250)
       
     } else {
-      setDisplayTime("visible");
+      setDisplayTime(true);
     }
   }
 
@@ -70,11 +77,11 @@ export default function Level1_FlashingPictures() {
           height: "100%",
         }}
       >
-        <img
+        {displayTime && <img
           className="flashingPicsImage"
           src={dirPath + image + ".jpg"}
-          style={{ visibility: displayTime }}
-        />
+          // style={{ visibility: displayTime }}
+        />}
       </div>
       <div>
         <button onClick={() => {displayPicture("check")}}>Check</button>
