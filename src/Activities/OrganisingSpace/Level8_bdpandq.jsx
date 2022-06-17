@@ -103,15 +103,15 @@ export default function Level5_LetterCharts(props) {
   function getDirection() {
     let direction = Math.floor(Math.random() * 4) + 1
     if (direction === 1) {
-        return upArrow
+        return "b"
     }
     if (direction === 2) {
-        return leftArrow
+        return "d"
     }
     if (direction === 3) {
-        return downArrow
+        return "p"
     }
-    return rightArrow
+    return "q"
   }
 
   function CreateLetters(place) {

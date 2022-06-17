@@ -34,6 +34,7 @@ import Level9_TheRuleBreakers from "./Activities/SequencingVisionandLanguage/Lev
 import Level8_FlippingAndRotatingShapes from "./Activities/VisualThinking/Level8_Flipping&RotatingShapes";
 import Level6_Arrows from "./Activities/OrganisingSpace/Level6_Arrows";
 import Level8_FindingLetters from "./Activities/TurningOnYourBrain/Level8_FindingLetters";
+import Level8_bdpandq from "./Activities/OrganisingSpace/Level8_bdpandq";
 
 
 class ActivityHolder extends React.Component {
@@ -160,6 +161,10 @@ class ActivityHolder extends React.Component {
           <Level6_Arrows />
         )}
         {this.state.activityName == "TurningOnYourBrain/8FindingLetters" && <Level8_FindingLetters /> }
+        {this.state.activityName ==
+          "OrganisingSpace/8bdpandq" && (
+          <Level8_bdpandq />
+        )}
       </div>
     );
   }

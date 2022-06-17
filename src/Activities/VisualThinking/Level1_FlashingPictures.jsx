@@ -29,27 +29,15 @@ export default function Level1_FlashingPictures() {
     
   }, [image])
 
+  function displayPicture(buttonName) {
 
-  function flashImage() {
-    setDisplayTime(true)
-    setTimeout(() => {
-      setDisplayTime(false);
-    }, time);
-  }
-
-  function displayPicture(buttonName, callback) {
-    console.log("running displau pic")
     if (buttonName !== "check") {
       let random = Math.floor(Math.random() * 91) + 1;
-      setImage(JSON.stringify(random));
-      console.log("I'm here")
-      // setTimeout(() => {
-      //   callback()
-      // }, 250)
-      
+      setImage(JSON.stringify(random));  
     } else {
       setDisplayTime(true);
     }
+    
   }
 
   return (
@@ -80,12 +68,11 @@ export default function Level1_FlashingPictures() {
         {displayTime && <img
           className="flashingPicsImage"
           src={dirPath + image + ".jpg"}
-          // style={{ visibility: displayTime }}
         />}
       </div>
       <div>
         <button onClick={() => {displayPicture("check")}}>Check</button>
-        <button onClick={() => {displayPicture("next", flashImage)}}>Next</button>
+        <button onClick={() => {displayPicture("next")}}>Next</button>
       </div>
     </div>
   );

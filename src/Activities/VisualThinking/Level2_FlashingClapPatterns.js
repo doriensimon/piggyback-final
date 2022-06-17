@@ -181,7 +181,7 @@ class Level2_FlashingClapPictures extends React.Component {
           guideOption={this.state.activity === "norm"}
         />
         {this.state.activity !== "norm" && <hr style={{position: 'absolute', width: '100%', height: '5px', color: '#fff', top: '388px'}}/>}
-        {this.state.show && (
+        
           <div className="container">
             {this.state.show && <div
               style={{
@@ -222,7 +222,7 @@ class Level2_FlashingClapPictures extends React.Component {
               {this.state.display4}
             </div>}
           </div>
-        )}
+        
         <div className="button_section">
           <button disabled={this.state.displayTime === "continuous"} onClick={() => this.setState({ show: true })}>Check</button>
           <button onClick={() => this.nextActivity()}>Next</button>

@@ -122,15 +122,14 @@ export default function Level1_FlashingPictures() {
       >
           {started && <div className="greenTextHeader">Count how many times you find the letter... <br /> <span style={{color: 'white'}}>{letter}</span></div>}
           {displayChart && <div className="whiteTextPara">{chart}</div>}
-          {displayAnswer && <div>
+          {displayAnswer && <div className="whiteTextPara" style={{lineHeight: 1.5}}>
               <Highlighter
                     searchWords={[letter]}
                     autoEscape={true}
                     textToHighlight={chart}
                     activeStyle={{color: 'green'}}
                     className={"whiteTextPara"}
-                    style={{marginTop: '20px', marginRight: '10%', marginLeft: '10%'}}
-                    highlightStyle={{color: 'greenyellow', fontSize: '1.5em', backgroundColor: 'transparent'}}
+                    highlightStyle={{color: 'greenyellow', fontSize: '24pt', backgroundColor: 'transparent'}}
                     highlightClassName={"highlightListText"}
                 />
             </div>}

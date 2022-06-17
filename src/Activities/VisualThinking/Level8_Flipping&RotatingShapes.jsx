@@ -31,11 +31,24 @@ export default function Level1_FlashingPictures() {
   var [choice, setChoice] = useState(false)
   var [correctCount, setCorrectCount] = useState(0)
   var [totalCount, setTotalCount] = useState(1)
+  var [imgWidth, setImgWidth] = useState()
+  var [imgHeight, setImgHeight] = useState()
 
   const rotateList = ["rotate(90deg)", "rotate(180deg)", "scaleX(-1)", "scaleY(-1)"]
 
 
   const [play] = useSound("/clickSound.wav");
+
+  const onImgLoad = ({ target: img }) => {
+    if (img.naturalWidth > img.naturalHeight) {
+      setImgWidth(img.naturalWidth)
+      setImgHeight(img.naturalWidth)
+    } else {
+      setImgWidth(img.naturalHeight)
+      setImgHeight(img.naturalHeight)
+    }
+  };
+
 
   useEffect(() => {
     clearInterval(loop);
@@ -93,7 +106,6 @@ export default function Level1_FlashingPictures() {
       let random = Math.floor(Math.random() * max) + 1;
       setLast(random);
       setImage(JSON.stringify(random));
-      console.log(random," this is the broken image")
 
       if (!choice) {
         setTimeout(() => {
@@ -122,7 +134,7 @@ export default function Level1_FlashingPictures() {
     } else {
       
         setRotation(move)
-        setDisplay(0)
+        setDisplay(10)
     }
   }
 
@@ -159,6 +171,7 @@ export default function Level1_FlashingPictures() {
           {display === 4 && <div id="correctText">Correct!</div>}
           {display === 3 && <div id="incorrectText">Incorrect!</div>}
         {display === 0 && <img
+          onLoad={onImgLoad}
           className="flashingPicsImage"
           src={
             "/VisualThinking/RememberingShapes/" + level + "/" + image + ".jpg"
@@ -167,45 +180,61 @@ export default function Level1_FlashingPictures() {
         />}
         {display === 1 && <div>
             <div style={{display: "flex"}}>
-                <div onClick={() => chooseOption("0")} style={{backgroundColor: 'white', height: '100px', width: '100px', margin: "10px", display: 'flex', justifyContent: 'center', alignItems: 'center', border: 'solid', borderWidth: '3px', borderColor: border1Color}}><img
-                className="flashingPicsImage"
+                <div onClick={() => chooseOption("0")} style={{backgroundColor: 'white', height: imgHeight, width: imgWidth, margin: "10px", display: 'flex', justifyContent: 'center', alignItems: 'center', border: 'solid', borderWidth: '3px', borderColor: border1Color}}><img
+                className="choiceImage"
                 src={
                     "/VisualThinking/RememberingShapes/" + level + "/" + image + ".jpg"
                 }
-                style={{height: '50px', width: "auto", transform: transform1  }}
+                style={{   transform: transform1  }}
                 /></div>
-                <div onClick={() => chooseOption("1")} style={{backgroundColor: 'white', height: "100px", width: '100px', margin: "10px", display: 'flex', justifyContent: 'center', alignItems: 'center', border: 'solid', borderWidth: '3px', borderColor: border2Color}}><img
-                className="flashingPicsImage"
+                <div onClick={() => chooseOption("1")} style={{backgroundColor: 'white', height: imgHeight, width: imgWidth, margin: "10px", display: 'flex', justifyContent: 'center', alignItems: 'center', border: 'solid', borderWidth: '3px', borderColor: border2Color}}><img
+                className="choiceImage"
                 src={
                     "/VisualThinking/RememberingShapes/" + level + "/" + image + ".jpg"
                 }
-                style={{height: '50px', width: "auto", transform: transform2 }}
+                style={{  transform: transform2 }}
                 /></div>
             </div>
             <div style={{display: "flex"}}>
-                <div onClick={() => chooseOption("2")} style={{backgroundColor: 'white', height: "100px", width: '100px', margin: "10px", display: 'flex', justifyContent: 'center', alignItems: 'center', border: 'solid', borderWidth: '3px', borderColor: border3Color}}><img
-                className="flashingPicsImage"
+                <div onClick={() => chooseOption("2")} style={{backgroundColor: 'white', height: imgHeight, width: imgWidth, margin: "10px", display: 'flex', justifyContent: 'center', alignItems: 'center', border: 'solid', borderWidth: '3px', borderColor: border3Color}}><img
+                className="choiceImage"
                 src={
                     "/VisualThinking/RememberingShapes/" + level + "/" + image + ".jpg"
                 }
-                style={{height: '50px', width: "auto", transform: transform3 }}
+                style={{  transform: transform3 }}
                 /></div>
-                <div onClick={() => chooseOption("3")} style={{backgroundColor: 'white', height: "100px", width: '100px', margin: "10px", display: 'flex', justifyContent: 'center', alignItems: 'center', border: 'solid', borderWidth: '3px', borderColor: border4Color}}><img
-                className="flashingPicsImage"
+                <div onClick={() => chooseOption("3")} style={{backgroundColor: 'white', height: imgHeight, width: imgWidth, margin: "10px", display: 'flex', justifyContent: 'center', alignItems: 'center', border: 'solid', borderWidth: '3px', borderColor: border4Color}}><img
+                className="choiceImage"
                 src={
                     "/VisualThinking/RememberingShapes/" + level + "/" + image + ".jpg"
                 }
-                style={{height: '50px', width: "auto", transform: transform4 }}
+                style={{  transform: transform4 }}
                 /></div>
             </div>
                 
         </div>}
+        {display === 10 && <div style={{display: "flex", width: '70%', justifyContent: 'space-around', alignItems: 'center' }}>
+          <img
+          className="flashingPicsImage"
+          src={
+            "/VisualThinking/RememberingShapes/" + level + "/" + image + ".jpg"
+          }
+          style={{ height: imageSize, width: "auto", transform: rotation, border: 'solid', borderColor: 'greenyellow', borderWidth: '2px'}}
+        />
+        <img
+          className="flashingPicsImage"
+          src={
+            "/VisualThinking/RememberingShapes/" + level + "/" + image + ".jpg"
+          }
+          style={{ height: imageSize, width: "auto"}}
+        />
+          </div>}
       </div>
           <div>
-              <button disabled={(display === 0) || (choice && (display === 0 || display === 1))} onClick={() => {
+              <button disabled={(display === 0) || (choice && (display === 0 || display === 1)) || display === 10} onClick={() => {
                   displayPicture("check")
               }}>Check</button>
-              <button onClick={() => {
+              <button disabled={display === 1} onClick={() => {
                   displayPicture("next")
               }}>Next</button>
           </div>
