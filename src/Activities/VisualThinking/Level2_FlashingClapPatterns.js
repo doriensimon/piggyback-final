@@ -180,9 +180,9 @@ class Level2_FlashingClapPictures extends React.Component {
           guideBool={this.state.guide}
           guideOption={this.state.activity === "norm"}
         />
-        {this.state.activity !== "norm" && <hr style={{position: 'absolute', width: '100%', height: '5px', color: '#fff', top: '388px'}}/>}
+        {this.state.activity !== "norm" && <hr className="centerLine" style={{position: 'absolute', width: '100%', height: '5px', color: '#fff'}}/>}
         
-          <div className="container">
+          <div className="container" id="centeringDots">
             {this.state.show && <div
               style={{
                 marginTop: this.state.margin0,

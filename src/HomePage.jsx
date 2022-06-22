@@ -15,8 +15,108 @@ import Level8_TheLongVowelSounds from "./Activities/SequencingVisionandLanguage/
 import Level8_TheShortVowelSound from "./Activities/SequencingVisionandLanguage/Level8_TheShortVowelSound";
 import Level9_TheVowelsWithR from "./Activities/SequencingVisionandLanguage/Level9_TheVowelsWithR";
 import Level9_OtheraAndOSounds from "./Activities/SequencingVisionandLanguage/Level9_Othera&oSounds";
-
+// import { FacebookAuthProvider } from "firebase/auth";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { initializeApp } from 'firebase/app';
+import { getAuth, signInWithPopup, FacebookAuthProvider, GoogleAuthProvider, TwitterAuthProvider, PhoneAuthProvider } from "firebase/auth";
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+// import { GoogleAuthProvider } from "firebase/auth";
+
+const providerGoogle = new GoogleAuthProvider();
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBBnitomGFqWPagp2JoLUQGaBVVnTLAqTg",
+  authDomain: "piggyback-aa8c3.firebaseapp.com",
+  projectId: "piggyback-aa8c3",
+  storageBucket: "piggyback-aa8c3.appspot.com",
+  messagingSenderId: "108254429034",
+  appId: "1:108254429034:web:032017719ae8fd8973ef13",
+  measurementId: "G-1PZ08H89VG"
+};
+const app = initializeApp(firebaseConfig);
+
+const uiConfig = {
+  // Popup signin flow rather than redirect flow.
+  signInFlow: 'popup',
+  // Redirect to /signedIn after sign in is successful. Alternatively you can 
+  signInSuccessUrl: '/',
+  // We will display Google and Facebook as auth providers.
+  signInOptions: [
+      GoogleAuthProvider.PROVIDER_ID,
+      FacebookAuthProvider.PROVIDER_ID,
+      TwitterAuthProvider.PROVIDER_ID,
+      PhoneAuthProvider.PROVIDER_ID,
+  ]
+  };
+const auth = getAuth();
+
+// const ui = new firebaseui.auth.AuthUI(auth)
+// const startFirebaseUI = function (elementId) {
+//   ui.start(elementId, uiConfig)
+// }
+
+const provider = new FacebookAuthProvider();
+
+
+
+
+function facebooksignIn () { signInWithPopup(auth, provider)
+  .then((result) => {
+    // The signed-in user info.
+    const user = result.user;
+
+    // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+    const credential = FacebookAuthProvider.credentialFromResult(result);
+    const accessToken = credential.accessToken;
+
+    console.log(user, credential, accessToken)
+
+    // ...
+  })
+  .catch((error) => {
+    // Handle Errors here.
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // The email of the user's account used.
+    const email = error.customData.email;
+    // The AuthCredential type that was used.
+    const credential = FacebookAuthProvider.credentialFromError(error);
+
+    console.log(errorCode, errorMessage, email, credential)
+
+    // ...
+  });
+}
+
+
+// const authGoogle = getAuth();
+// signInWithPopup(auth, providerGoogle)
+//   .then((result) => {
+//     // This gives you a Google Access Token. You can use it to access the Google API.
+//     const credential = GoogleAuthProvider.credentialFromResult(result);
+//     const token = credential.accessToken;
+//     // The signed-in user info.
+//     const user = result.user;
+//     // ...
+//   }).catch((error) => {
+//     // Handle Errors here.
+//     const errorCode = error.code;
+//     const errorMessage = error.message;
+//     // The email of the user's account used.
+//     const email = error.customData.email;
+//     // The AuthCredential type that was used.
+//     const credential = GoogleAuthProvider.credentialFromError(error);
+//     // ...
+//   });
+
+
+
+
+
+
+
+
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
@@ -61,6 +161,19 @@ export default function HomePage() {
 
   return (
     <div className>
+      {/* <div id="overlayContainer">
+          <div id="loginModal">
+            <div>Complete Sign In With...</div>
+            <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth}/>
+            
+            <div>
+              <div>Or Enter Code:</div>
+              <input type="text"></input>
+            </div>
+            <div>Don't have an account? <a href="google.com">Register Here</a></div> 
+          </div>
+      </div> */}
+        
       <div>
         <div className="options">
           <div style={{ display: "none" }}>
@@ -104,6 +217,8 @@ export default function HomePage() {
             </Dropdown.Menu>
           </Dropdown>
         </div>
+        
+        
         <div className="layout">
           <div className="topics">
             <div>
