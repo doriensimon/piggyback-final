@@ -84,12 +84,14 @@ export default function Level5_FlashingDotToDotPatterns() {
       endFunc(dot)
     }
 
-
-    setShowLines(true)
-    setTimeout(() =>{
-      setShowLines(false)
-      setCheck(false)
-    }, displayTime) 
+    setTimeout(() => {
+      setShowLines(true)
+      setTimeout(() =>{
+        setShowLines(false)
+        setCheck(false)
+      }, displayTime) 
+    }, 500)
+    
 
   }
 
@@ -128,51 +130,54 @@ export default function Level5_FlashingDotToDotPatterns() {
           <div className="circle"><div id="dot9"></div></div>
         </div>
       </div>
-      <Xarrow
-                start={start} //can be react ref
-                end={end}
-                showHead={false}
-                lineColor={'silver'}
-                strokeWidth={10}
-                curveness={0}
-                showXarrow={showLines} //or an id
-            />
-      <Xarrow
-          start={start1} //can be react ref
-          end={end1}
-          showHead={false}
-          lineColor={'silver'}
-          strokeWidth={10}
-          curveness={0}
-          showXarrow={showLines} //or an id
-      />
-      <Xarrow
-                start={start2} //can be react ref
-                end={end2}
-                showHead={false}
-                lineColor={'silver'}
-                strokeWidth={10}
-                curveness={0}
-                showXarrow={showLines} //or an id
-            />
-      <Xarrow
-                start={start3} //can be react ref
-                end={end3}
-                showHead={false}
-                lineColor={'silver'}
-                strokeWidth={10}
-                curveness={0}
-                showXarrow={showLines} //or an id
-            />
-      <Xarrow
-                start={start4} //can be react ref
-                end={end4}
-                showHead={false}
-                lineColor={'silver'}
-                strokeWidth={10}
-                curveness={0}
-                showXarrow={showLines} //or an id
-            />
+      {showLines && <div>
+        <Xarrow
+                  start={start} //can be react ref
+                  end={end}
+                  showHead={false}
+                  lineColor={'silver'}
+                  strokeWidth={10}
+                  curveness={0}
+                  // showXarrow={showLines} //or an id
+              />
+        <Xarrow
+            start={start1} //can be react ref
+            end={end1}
+            showHead={false}
+            lineColor={'silver'}
+            strokeWidth={10}
+            curveness={0}
+            // showXarrow={showLines} //or an id
+        />
+        <Xarrow
+                  start={start2} //can be react ref
+                  end={end2}
+                  showHead={false}
+                  lineColor={'silver'}
+                  strokeWidth={10}
+                  curveness={0}
+                  // showXarrow={showLines} //or an id
+              />
+        <Xarrow
+                  start={start3} //can be react ref
+                  end={end3}
+                  showHead={false}
+                  lineColor={'silver'}
+                  strokeWidth={10}
+                  curveness={0}
+                  // showXarrow={showLines} //or an id
+              />
+        <Xarrow
+                  start={start4} //can be react ref
+                  end={end4}
+                  showHead={false}
+                  lineColor={'silver'}
+                  strokeWidth={10}
+                  curveness={0}
+                  // showXarrow={showLines} //or an id
+              />
+      </div>}
+      
       
       <div className="button_section">
         <button disabled={check} onClick={() => {setShowLines(true); setCheck(true)}}>Check</button>

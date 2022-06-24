@@ -27,7 +27,7 @@ class Level2_FlashingClapPictures extends React.Component {
       beat: false,
       started: false,
       backImage: {},
-      guide: false,
+      guide: true,
     };
     this.nextActivity = this.nextActivity.bind(this);
   }
@@ -151,12 +151,15 @@ class Level2_FlashingClapPictures extends React.Component {
     if (this.state.displayNumber > 4) {
       this.setState({ number2: "block" });
     }
-    this.setState({ show: true });
-    if (this.state.displayTime !== "continuous") {
-      setTimeout(() => {
-        this.setState({ show: false });
-      }, this.state.displayTime);
-    }
+    setTimeout(() => {
+      this.setState({ show: true });
+      if (this.state.displayTime !== "continuous") {
+        setTimeout(() => {
+          this.setState({ show: false });
+        }, this.state.displayTime);
+      }
+    }, 500)
+    
     
     if (!this.state.started) {
       this.runBeat();
@@ -180,7 +183,7 @@ class Level2_FlashingClapPictures extends React.Component {
           guideBool={this.state.guide}
           guideOption={this.state.activity === "norm"}
         />
-        {this.state.activity !== "norm" && <hr className="centerLine" style={{position: 'absolute', width: '100%', height: '5px', color: '#fff'}}/>}
+        {this.state.activity !== "norm" && this.state.guide && <hr className="centerLine" style={{position: 'absolute', width: '100%', height: '5px', color: '#fff'}}/>}
         
           <div className="container" id="centeringDots">
             {this.state.show && <div
