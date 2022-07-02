@@ -21,7 +21,7 @@ export default function Level1_FlashingPictures() {
         setTimeout(() => {
           setDisplayTime(false);
         }, time);
-      }, 150)
+      }, 500)
      } else {
        setCount(1)
      }

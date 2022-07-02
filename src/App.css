@@ -357,7 +357,7 @@
   transform: translateY(-50%);
 }
 
-#loginModal {
+.loginModal {
   background-color: white;
   width: 50vw;
   height: 50vh;

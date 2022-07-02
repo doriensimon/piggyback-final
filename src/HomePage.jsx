@@ -18,103 +18,17 @@ import Level9_OtheraAndOSounds from "./Activities/SequencingVisionandLanguage/Le
 // import { FacebookAuthProvider } from "firebase/auth";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { initializeApp } from 'firebase/app';
+import { getFirestore } from "firebase/firestore";
+import { collection, addDoc, doc, getDoc, getDocs, query, where, setDoc } from "firebase/firestore"; 
+import { getFunctions, httpsCallable } from 'firebase/functions';
 import { getAuth, signInWithPopup, FacebookAuthProvider, GoogleAuthProvider, TwitterAuthProvider, PhoneAuthProvider } from "firebase/auth";
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-// import { GoogleAuthProvider } from "firebase/auth";
-
-const providerGoogle = new GoogleAuthProvider();
-
-
-const firebaseConfig = {
-  apiKey: "AIzaSyBBnitomGFqWPagp2JoLUQGaBVVnTLAqTg",
-  authDomain: "piggyback-aa8c3.firebaseapp.com",
-  projectId: "piggyback-aa8c3",
-  storageBucket: "piggyback-aa8c3.appspot.com",
-  messagingSenderId: "108254429034",
-  appId: "1:108254429034:web:032017719ae8fd8973ef13",
-  measurementId: "G-1PZ08H89VG"
-};
-const app = initializeApp(firebaseConfig);
-
-const uiConfig = {
-  // Popup signin flow rather than redirect flow.
-  signInFlow: 'popup',
-  // Redirect to /signedIn after sign in is successful. Alternatively you can 
-  signInSuccessUrl: '/',
-  // We will display Google and Facebook as auth providers.
-  signInOptions: [
-      GoogleAuthProvider.PROVIDER_ID,
-      FacebookAuthProvider.PROVIDER_ID,
-      TwitterAuthProvider.PROVIDER_ID,
-      PhoneAuthProvider.PROVIDER_ID,
-  ]
-  };
-const auth = getAuth();
-
-// const ui = new firebaseui.auth.AuthUI(auth)
-// const startFirebaseUI = function (elementId) {
-//   ui.start(elementId, uiConfig)
-// }
-
-const provider = new FacebookAuthProvider();
+import {loadStripe} from '@stripe/stripe-js';
+import { json } from "body-parser";
+// import {Routes, Route, useNavigate} from 'react-router-dom';
 
 
-
-
-function facebooksignIn () { signInWithPopup(auth, provider)
-  .then((result) => {
-    // The signed-in user info.
-    const user = result.user;
-
-    // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-    const credential = FacebookAuthProvider.credentialFromResult(result);
-    const accessToken = credential.accessToken;
-
-    console.log(user, credential, accessToken)
-
-    // ...
-  })
-  .catch((error) => {
-    // Handle Errors here.
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // The email of the user's account used.
-    const email = error.customData.email;
-    // The AuthCredential type that was used.
-    const credential = FacebookAuthProvider.credentialFromError(error);
-
-    console.log(errorCode, errorMessage, email, credential)
-
-    // ...
-  });
-}
-
-
-// const authGoogle = getAuth();
-// signInWithPopup(auth, providerGoogle)
-//   .then((result) => {
-//     // This gives you a Google Access Token. You can use it to access the Google API.
-//     const credential = GoogleAuthProvider.credentialFromResult(result);
-//     const token = credential.accessToken;
-//     // The signed-in user info.
-//     const user = result.user;
-//     // ...
-//   }).catch((error) => {
-//     // Handle Errors here.
-//     const errorCode = error.code;
-//     const errorMessage = error.message;
-//     // The email of the user's account used.
-//     const email = error.customData.email;
-//     // The AuthCredential type that was used.
-//     const credential = GoogleAuthProvider.credentialFromError(error);
-//     // ...
-//   });
-
-
-
-
-
-
+// const stripe = loadStripe('pk_test_51LE1u6FpIZcDi74lVvlPa54lILoezo9azohkMKEawNY0cgnTXdru5G6kcAX8VHPUrSMvKbb0RcHSH5lojRuH0nLa0079U3DvuH')
 
 
 
@@ -126,6 +40,199 @@ export default function HomePage() {
   var [ActivityShown, setActivityShown] = useState(false);
   var [disable, setDisable] = useState(true);
   var [stopFunc, setStopFunc] = useState(0);
+  var [signInView, setSignInView] = useState(true)
+  var [copies, setCopies] = useState(1)
+  var [gateway, setGateway] = useState(true)
+  var [code, setCode] = useState()
+  var [UID, setUID] = useState()
+  var [exists, setExists] = useState(false)
+
+  
+  useEffect(() => {
+    if (JSON.stringify(window.location.href).includes('canceled')) {
+      window.location.href="http://localhost:3000"
+    }
+    else if (JSON.stringify(window.location.href).includes('success')) {
+      postPurchasePage()
+    } else {
+      console.log("first time here")
+    }
+
+  }, [])
+
+  // const CreateStripeCheckout = firebase.functions().httpsCallable('returnMessage');
+  const firebaseConfig = {
+    apiKey: "AIzaSyBBnitomGFqWPagp2JoLUQGaBVVnTLAqTg",
+    authDomain: "piggyback-aa8c3.firebaseapp.com",
+    projectId: "piggyback-aa8c3",
+    storageBucket: "piggyback-aa8c3.appspot.com",
+    messagingSenderId: "108254429034",
+    appId: "1:108254429034:web:032017719ae8fd8973ef13",
+    measurementId: "G-1PZ08H89VG"
+  };
+  const app = initializeApp(firebaseConfig);
+  // const functions = getFunctions(app);
+
+  
+  const db = getFirestore(app);
+  const auth = getAuth();
+
+  const uiConfig = {
+    // Popup signin flow rather than redirect flow.
+    signInFlow: 'popup',
+    // Redirect to /signedIn after sign in is successful. Alternatively you can 
+    signInSuccessUrl: '/',
+    // We will display Goog 
+    signInOptions: [
+        GoogleAuthProvider.PROVIDER_ID,
+        FacebookAuthProvider.PROVIDER_ID,
+        TwitterAuthProvider.PROVIDER_ID,
+        // PhoneAuthProvider.PROVIDER_ID,
+  
+    ],
+    callbacks: {
+      signInSuccessWithAuthResult(authResult) {
+        let newuser = authResult.additionalUserInfo.isNewUser
+        if (newuser) {
+          // signInSuccess(authResult.user.uid)
+          setUID(authResult.user.uid)
+          createUser(authResult.user.uid, "")
+          setSignInView(false)
+        } else {
+          // setSignInView(false) // Delete Before Finishing this Flow
+          setUID(authResult.user.uid)
+          setExists(true)
+          DoesUserHaveLicense(authResult.user.uid)
+        }
+        
+      }
+    }
+    };
+
+
+    async function DoesUserHaveLicense(userID) {
+      const q = query(collection(db, "users"), where("userID", "==", userID));
+
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id, " => ", doc.data());
+        let document = doc.data()
+        if (document.license === "") {
+          setSignInView(false)
+        } else {
+          setGateway(false)
+        }
+      });
+    }
+
+  async function signInSuccess() {
+    try {
+      const docRef = await addDoc(collection(db, "securityKey"), {
+        used: true,
+      });
+      console.log("Security Key Document written with ID: ", docRef.id);
+      return docRef.id
+    } catch (e) {
+      console.error("Error adding document: ", e);
+      return null
+    }
+  }
+  
+  
+  async function createUser(userID, docID) {
+    try {
+      const docRef = await addDoc(collection(db, "users"), {
+        license: docID,
+        userID: userID,
+      });
+      console.log("User Document written with ID: ", docRef.id);
+      // setSignInView(false)
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+  }
+
+  async function checkLicenseCode() {
+    const docRef = doc(db, "securityKey", code);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      let document = docSnap.data()
+      if (!document.used) {
+        const q = query(collection(db, "users"), where("userID", "==", auth.currentUser.uid));
+
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((docs) => {
+          // doc.data() is never undefined for query doc snapshots
+          console.log(docs.id, " => ", docs.data());
+          const cityRef = doc(db, 'users', docs.id);
+          setDoc(cityRef, {
+            license: code
+          }, {merge: true})
+        });
+        setDoc(docRef, {
+          used: true
+        }, {merge: true})
+        setGateway(false)
+      } else {
+        alert("This Code is Already In Use")
+      }
+    }
+  }
+
+  async function postPurchasePage() {
+    let currentUrl = JSON.stringify(window.location.href);
+
+    // locating the checkout session id before I added the quantity thing which I'll remove if I can figure this out
+    let start = currentUrl.indexOf('session_id')
+    let sessionid = currentUrl.slice(start + 11).slice(0, -1);
+    console.log(sessionid)
+    // to integrate later where I somehow verify that this checkout session exists
+    // const session = await stripe.checkout.sessions.retrieve(
+    //   JSON.stringify(sessionid)
+    // );
+    // console.log(session)
+
+
+    // locating the number of copies
+    let begin = currentUrl.indexOf("quantity");
+    let end = currentUrl.indexOf("user_id")
+    let amount = currentUrl.slice(begin + 9, end - 1)
+    let numeric = JSON.parse(amount)
+    if (numeric > 1) {
+      console.log('greater')
+      for (let i = 0; i < numeric; i++) {
+        try {
+          const docRef = await addDoc(collection(db, "securityKey"), {
+            used: false,
+          });
+        } catch (e) {
+          console.error("Error adding document: ", e);
+        }
+      }
+    } else {
+      console.log('function as usual.')
+    }
+
+    // locating the user id
+    let place = currentUrl.indexOf('user_id')
+    let user_id = currentUrl.slice(place + 8).slice(0, -1)
+    
+    const secKey = await signInSuccess();
+    const q = query(collection(db, "users"), where("userID", "==", user_id));
+
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((docs) => {
+      // doc.data() is never undefined for query doc snapshots
+      console.log(docs.id, " => ", docs.data());
+      const cityRef = doc(db, 'users', docs.id);
+      setDoc(cityRef, {
+        license: secKey
+      }, {merge: true})
+    });
+    
+  }
+
 
   function nextView(want) {
     if (want === "Activity") {
@@ -161,19 +268,32 @@ export default function HomePage() {
 
   return (
     <div className>
-      {/* <div id="overlayContainer">
-          <div id="loginModal">
+      {/* {gateway && <div id="overlayContainer">
+          {signInView && <div className="loginModal">
             <div>Complete Sign In With...</div>
             <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth}/>
-            
+          </div>}
+          {!signInView && <div className="loginModal">
+            <div>Purhcase Piggyback</div>
             <div>
-              <div>Or Enter Code:</div>
-              <input type="text"></input>
+              <div>
+                <span>$ 150</span> 
+                <button onClick={() => {window.location.href = 'https://us-central1-piggyback-aa8c3.cloudfunctions.net/createStripeCheckoutV5?user_id=' + UID}}>Buy Now</button>
+              </div>
+              
+              <div>
+                <input type="number" placeholder="2" onChange={(e) => {setCopies(e.target.value); }} style={{width: '100px'}}></input>
+                <span>$ 120/each</span>
+                <button onClick={() => {window.location.href = 'https://us-central1-piggyback-aa8c3.cloudfunctions.net/createStripeCheckoutV3?quantity=' + copies + '&user_id=' + UID}}>Buy Now</button>
+              </div>
+              <div style={{marginTop: '20px'}}>
+                <div>Or Enter Code:</div>
+                <input type="text" onChange={(e) => setCode(e.target.value)}></input>
+                <button onClick={() => checkLicenseCode()}>Submit</button>
+              </div>
             </div>
-            <div>Don't have an account? <a href="google.com">Register Here</a></div> 
-          </div>
-      </div> */}
-        
+          </div>}
+      </div>} */}
       <div>
         <div className="options">
           <div style={{ display: "none" }}>
