@@ -15,7 +15,6 @@ export default function Level1_FlashingPictures() {
 
   useEffect(() => {
      if (count === 1) {
-      setDisplayTime(false)
       setTimeout(() => {
         setDisplayTime(true)
         setTimeout(() => {
