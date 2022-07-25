@@ -1,5 +1,4 @@
 import NextCheckButtons from "./nextCheckButtons";
-import FlashingPictureButtons from "./picturesComponent";
 import { useEffect, useState } from "react";
 import FlashingButtons from "./flashingButtons";
 import SimulChoice from "./flashLetterFuncs/simulChoice";

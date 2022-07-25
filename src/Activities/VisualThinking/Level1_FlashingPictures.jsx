@@ -16,8 +16,10 @@ export default function Level1_FlashingPictures() {
   useEffect(() => {
      if (count === 1) {
       setTimeout(() => {
+        console.log("inside the delay")
         setDisplayTime(true)
         setTimeout(() => {
+          console.log("now remove it. Inside inner")
           setDisplayTime(false);
         }, time);
       }, 500)

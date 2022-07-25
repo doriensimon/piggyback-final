@@ -9,7 +9,7 @@ export default function Level1_FlashingPictures() {
   var [displayTime, setDisplayTime] = useState("hidden");
   var [time, setTime] = useState(1000);
   var [image, setImage] = useState("");
-  var [level, setLevel] = useState("Level3");
+  var [level, setLevel] = useState("Level2");
   var [last, setLast] = useState(1000);
   var [triggered, setTriggered] = useState(false);
   var [beat, setBeat] = useState(false);
@@ -33,6 +33,7 @@ export default function Level1_FlashingPictures() {
   var [totalCount, setTotalCount] = useState(1)
   var [imgWidth, setImgWidth] = useState()
   var [imgHeight, setImgHeight] = useState()
+  var [stack, setStack] = useState('row')
 
   const rotateList = ["rotate(90deg)", "rotate(180deg)", "scaleX(-1)", "scaleY(-1)"]
 
@@ -123,9 +124,13 @@ export default function Level1_FlashingPictures() {
         setTransform3(rotateList[2])
         setTransform4(rotateList[3])
         setTimeout(() => {
+          console.log("not in the choice view")
           setDisplay(0)
           setTimeout(() => {
-            setDisplay(1)
+            setDisplay(6)
+            setTimeout(() => {
+              setDisplay(1)
+            }, 2000)
           }, time);
         }, 200);
       }
@@ -156,8 +161,9 @@ export default function Level1_FlashingPictures() {
         choiceBool={choice}
         useBeat={setBeat}
         beatBool={beat}
-        imageBool={imageSize}
-        changeImage={setImageSize}
+        imageBool={level}
+        changeImage={setLevel}
+        changeStack={setStack}
       />
       <div
         style={{
@@ -213,13 +219,13 @@ export default function Level1_FlashingPictures() {
             </div>
                 
         </div>}
-        {display === 10 && <div style={{display: "flex", width: '70%', justifyContent: 'space-around', alignItems: 'center' }}>
+        {display === 10 && <div style={{display: "flex", width: '70%', justifyContent: 'space-around', alignItems: 'center', flexDirection: stack, height: "50%" }}>
           <img
           className="flashingPicsImage"
           src={
             "/VisualThinking/RememberingShapes/" + level + "/" + image + ".jpg"
           }
-          style={{ height: imageSize, width: "auto", transform: rotation, border: 'solid', borderColor: 'greenyellow', borderWidth: '2px'}}
+          style={{ height: imageSize, width: "auto", transform: rotation, border: 'solid', borderColor: 'greenyellow', borderWidth: '10px'}}
         />
         <img
           className="flashingPicsImage"
@@ -231,10 +237,10 @@ export default function Level1_FlashingPictures() {
           </div>}
       </div>
           <div>
-              <button disabled={(display === 0) || (choice && (display === 0 || display === 1)) || display === 10} onClick={() => {
+              <button disabled={(display === 0) || display === 6 || (choice && (display === 0 || display === 1)) || display === 10} onClick={() => {
                   displayPicture("check")
               }}>Check</button>
-              <button disabled={display === 1} onClick={() => {
+              <button disabled={display === 1 || display === 6} onClick={() => {
                   displayPicture("next")
               }}>Next</button>
           </div>

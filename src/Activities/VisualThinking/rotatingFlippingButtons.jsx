@@ -89,25 +89,25 @@ export default function RotatingFlippingButtons(props) {
 
         <Dropdown.Menu>
           <Dropdown.Item
-            onClick={() => {props.changeLevel("scaleY(-1)");}}
+            onClick={() => {props.changeLevel("scaleY(-1)"); props.changeStack("column")}}
             active={props.levelBool === "scaleY(-1)"}
           >
             Up Side Down
           </Dropdown.Item>
           <Dropdown.Item
-            onClick={() => {props.changeLevel("scaleX(-1)");}}
+            onClick={() => {props.changeLevel("scaleX(-1)"); props.changeStack("row")}}
             active={props.levelBool === "scaleX(-1)"}
           >
             Flipped Sideways
           </Dropdown.Item>
           <Dropdown.Item
-            onClick={() => {props.changeLevel("rotate(90deg)");}}
+            onClick={() => {props.changeLevel("rotate(90deg)"); props.changeStack("row")}}
             active={props.levelBool === "rotate(90deg)"}
           >
             Rotated Quarter Turn Clockwise
           </Dropdown.Item>
           <Dropdown.Item
-            onClick={() => {props.changeLevel("rotate(180deg)");}}
+            onClick={() => {props.changeLevel("rotate(180deg)"); props.changeStack("row")}}
             active={props.levelBool === "rotate(180deg)"}
           >
             Rotated Half A Turn
@@ -173,14 +173,14 @@ export default function RotatingFlippingButtons(props) {
 
         <Dropdown.Menu>
           <Dropdown.Item
-            onClick={() => props.changeImage("auto")}
-            active={props.imageBool === "auto"}
+            onClick={() => props.changeImage("Level2")}
+            active={props.imageBool === "Level2"}
           >
             Level 1
           </Dropdown.Item>
           <Dropdown.Item
-            onClick={() => props.changeImage("50%")}
-            active={props.imageBool === "50%"}
+            onClick={() => props.changeImage("Level3")}
+            active={props.imageBool === "Level3"}
           >
             Level 2
           </Dropdown.Item>

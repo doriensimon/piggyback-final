@@ -1,8 +1,9 @@
 import Dropdown from "react-bootstrap/Dropdown";
 import LineTo from 'react-lineto'; 
-import React, {useRef, useState} from "react";
+import React, {useRef, useState, useEffect} from "react";
 import Xarrow from "react-xarrows";
 import DotToDotButtons from "./DotToDotButtons"
+import useSound from "use-sound";
 
 export default function Level5_FlashingDotToDotPatterns() {
 
@@ -20,9 +21,15 @@ export default function Level5_FlashingDotToDotPatterns() {
   var [displayTime, setDisplayTime] = useState(1000)
   var [lineCount, setLineCount] = useState(3)
   var [check, setCheck] = useState(true)
+  var [beat, setBeat] = useState(false);
+  var [loop, setLoop] = useState();
+  var [triggered, setTriggered] = useState(false);
  
   const startFuncs = [setStart, setStart1, setStart2, setStart3, setStart4]
   const endFuncs = [setEnd, setEnd1, setEnd2, setEnd3, setEnd4]
+
+  const [play] = useSound("/clickSound.wav");
+  
 
   const dotOptions = {
     "dot1" : ["dot2", "dot4", "dot5"], 
@@ -35,6 +42,11 @@ export default function Level5_FlashingDotToDotPatterns() {
     "dot8": ["dot4", "dot5", "dot6", "dot7", "dot9"], 
     "dot9": ["dot5", "dot6", "dot8"]
   }
+
+  useEffect(() => {
+    clearInterval(loop);
+    setTriggered(false);
+  }, [beat]);
 
 
   function noOptions(seen, currList) {
@@ -56,6 +68,14 @@ export default function Level5_FlashingDotToDotPatterns() {
   }
 
   function showPattern() {
+    if (beat && !triggered) {
+      setLoop(
+        setInterval(() => {
+          play();
+        }, 1000)
+      );
+      setTriggered(true);
+    }
     setCheck(true)
     setShowLines(false)
     let seen = []
@@ -110,6 +130,8 @@ export default function Level5_FlashingDotToDotPatterns() {
         flashBool={displayTime}
         changeActivity={setLineCount}
         activityBool={lineCount}
+        addBeat={setBeat}
+        beatBool={beat}
 
       
       />
