@@ -267,8 +267,8 @@ export default function HomePage() {
   }
 
   return (
-    <div className>
-      {gateway && <div id="overlayContainer">
+    <div>
+      {/* {gateway && <div id="overlayContainer">
           {signInView && <div className="loginModal">
             <div>Complete Sign In With...</div>
             <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth}/>
@@ -293,7 +293,7 @@ export default function HomePage() {
               </div>
             </div>
           </div>}
-      </div>}
+      </div>} */}
       <div>
         <div className="options">
           <div style={{ display: "none" }}>

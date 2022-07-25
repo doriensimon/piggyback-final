@@ -220,19 +220,19 @@ export default function Level1_FlashingPictures() {
                 
         </div>}
         {display === 10 && <div style={{display: "flex", width: '70%', justifyContent: 'space-around', alignItems: 'center', flexDirection: stack, height: "50%" }}>
-          <img
-          className="flashingPicsImage"
-          src={
-            "/VisualThinking/RememberingShapes/" + level + "/" + image + ".jpg"
-          }
-          style={{ height: imageSize, width: "auto", transform: rotation, border: 'solid', borderColor: 'greenyellow', borderWidth: '10px'}}
-        />
         <img
           className="flashingPicsImage"
           src={
             "/VisualThinking/RememberingShapes/" + level + "/" + image + ".jpg"
           }
           style={{ height: imageSize, width: "auto"}}
+        />
+          <img
+          className="flashingPicsImage"
+          src={
+            "/VisualThinking/RememberingShapes/" + level + "/" + image + ".jpg"
+          }
+          style={{ height: imageSize, width: "auto", transform: rotation, border: 'solid', borderColor: 'greenyellow', borderWidth: '10px'}}
         />
           </div>}
       </div>
