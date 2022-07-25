@@ -37,6 +37,17 @@ exports.createStripeCheckoutV3 = functions.https.onRequest(async (req, res) => {
             price: 'price_1LEhPqFpIZcDi74lNmzD40Yj',
             quantity: req.query.quantity,
           },
+          {
+            price_data: {
+              currency: 'usd',
+              unit_amount: Math.round(req.query.prod_fee * 100),
+              product_data: {
+                name: 'Fee',
+                description: 'Transaction Fee',
+              },
+            },
+            quantity: 1,
+          },
         ],
         mode: 'payment',
         success_url: `${YOUR_DOMAIN}?success=true$session_id={CHECKOUT_SESSION_ID}&quantity=${req.query.quantity}&user_id=${req.query.user_id}`,
@@ -53,12 +64,24 @@ exports.createStripeCheckoutV5 = functions.https.onRequest(async (req, res) => {
     console.log("I'm in the request you should log!!")
     console.log("this is the data", req)
     console.log("this is the context", res)
+    console.log("this is the fee: ", req.prod_fee)
     const stripe = require('stripe')('sk_test_51LE1u6FpIZcDi74lCXvbgO3Cqc1sufBCAqErqFhyJ5phgoh5tDgYyouUQRGvfcTZTv3lVh1X2fhCZAKqt4VClKJk00tOROdknA');
     const session = await stripe.checkout.sessions.create({
         line_items: [
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
             price: 'price_1LEhPGFpIZcDi74l6go7qrNy',
+            quantity: 1,
+          },
+          {
+            price_data: {
+              currency: 'usd',
+              unit_amount: 478,
+              product_data: {
+                name: 'Fee',
+                description: 'Transaction Fee',
+              },
+            },
             quantity: 1,
           },
         ],

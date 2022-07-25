@@ -266,6 +266,13 @@ export default function HomePage() {
     }
   }
 
+  function calculateFee() {
+    let total = 120 * copies
+    let totalWithFee = (total + .3) / (1 - .029)
+    let fee = totalWithFee - total
+    return fee   
+  }
+
   return (
     <div>
       {/* {gateway && <div id="overlayContainer">
@@ -284,7 +291,7 @@ export default function HomePage() {
               <div>
                 <input type="number" placeholder="2" onChange={(e) => {setCopies(e.target.value); }} style={{width: '100px'}}></input>
                 <span>$ 120/each</span>
-                <button onClick={() => {window.location.href = 'https://us-central1-piggyback-aa8c3.cloudfunctions.net/createStripeCheckoutV3?quantity=' + copies + '&user_id=' + UID}}>Buy Now</button>
+                <button onClick={() => {window.location.href = 'https://us-central1-piggyback-aa8c3.cloudfunctions.net/createStripeCheckoutV3?quantity=' + copies + '&user_id=' + UID + "&prod_fee=" + calculateFee()}}>Buy Now</button>
               </div>
               <div style={{marginTop: '20px'}}>
                 <div>Or Enter Code:</div>
